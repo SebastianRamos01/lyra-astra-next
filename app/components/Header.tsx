@@ -38,7 +38,7 @@ export default function Header() {
                 <div className="">
                     Adquisitions:
                 </div>
-                <ul className="flex gap-3 text-sm">
+                <ul className="flex gap-3 text-xs">
                     <li>Instagram</li>
                     <li>Twitter</li>
                     <li>Email</li>
