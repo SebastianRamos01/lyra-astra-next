@@ -51,10 +51,8 @@ export default function Home() {
     };
   }, []);
 
-  console.log(scrollDirection);
-
-  const perspectiveValue = scrollDirection === 'down' ? 12 : scrollDirection === 'up' ? 12 : 0;
-  const rotateValue = scrollDirection === 'down' ? 12 : scrollDirection === 'up' ? 12 : 0;
+  const perspectiveValue = scrollDirection === 'down' ? 6 : scrollDirection === 'up' ? 6 : 0;
+  const rotateValue = scrollDirection === 'down' ? 8 : scrollDirection === 'up' ? 8 : 0;
   const zValue = scrollDirection === 'down' ? -0.5 : scrollDirection === 'up' ? 0.5 : 0;
 
   return (

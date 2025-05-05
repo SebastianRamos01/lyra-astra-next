@@ -29,7 +29,7 @@ export default function Header() {
                     custom={i}
                     initial='hidden'
                     animate='visible'
-                    className={`uppercase ${letter === ' ' ? 'mr-2' : 'mr-[1px]'}`}>
+                    className={`uppercase ${letter === ' ' ? 'mr-2' : 'mr-[0.5px]'}`}>
                         {letter}
                     </motion.p>
                 ))}
