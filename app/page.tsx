@@ -15,7 +15,7 @@ const imgVariants = {
     y: 0,
     transition: {
       duration: 0.45,
-      delay: 0.5 + parent * 0.35 + 0.5 + index * 0.25,
+      delay: 0.4 + parent * 0.35 + 0.5 + index * 0.25,
       ease: [0.7, 0, 0.84, 0], // Lista offset + 0.5s + img stagger
     },
   }),
