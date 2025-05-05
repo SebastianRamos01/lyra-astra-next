@@ -4,15 +4,19 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Header from "./components/Header";
 import { works } from "./data/data";
 import { useState, useRef, useEffect } from "react";
+import Footer from "./components/Footer";
+import Image from "next/image";
 
 // Variants for the initial and visible delay states of the images
 const imgVariants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 12 },
   visible: ({ index, parent }: { index: number; parent: number }) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.5 + parent * 0.35 + 0.5 + index * 0.25, ease: [0.7, 0, 0.84, 0], // Lista offset + 0.5s + img stagger
+      duration: 0.45,
+      delay: 0.5 + parent * 0.35 + 0.5 + index * 0.25,
+      ease: [0.7, 0, 0.84, 0], // Lista offset + 0.5s + img stagger
     },
   }),
 }
@@ -49,8 +53,9 @@ export default function Home() {
 
   console.log(scrollDirection);
 
-  const skewValue = scrollDirection === "down" ? 0.75 : scrollDirection === "up" ? -0.75 : 0
-  const scaleValue = scrollDirection === "down" ? 0.98 : scrollDirection === "up" ? 0.98 : 1
+  const perspectiveValue = scrollDirection === 'down' ? 12 : scrollDirection === 'up' ? 12 : 0;
+  const rotateValue = scrollDirection === 'down' ? 12 : scrollDirection === 'up' ? 12 : 0;
+  const zValue = scrollDirection === 'down' ? -0.5 : scrollDirection === 'up' ? 0.5 : 0;
 
   return (
     <main>
@@ -66,7 +71,7 @@ export default function Home() {
                 {el.images.map((img, i) => (
                   <motion.li
                     key={i}
-                    animate={{ skewX: skewValue , scale: scaleValue}}
+                    animate={{ perspective: perspectiveValue, rotateY: rotateValue, rotateZ: zValue }}
                     className={`col-span-2 size-full overflow-hidden ${i === 2 || i === 5 ? 'col-span-4 md:col-span-2' : 'col-span-2'}`}>
                     <motion.div
                       variants={imgVariants}
@@ -74,7 +79,13 @@ export default function Home() {
                       animate='visible'
                       initial='hidden'
                       >
-                      <img src={`/images/${img}`} alt={img} />
+                      <Image 
+                        src={`/images/${img}`} 
+                        alt={img} 
+                        width={1000} 
+                        height={1000} 
+                        priority
+                        ></Image>
                     </motion.div>
                     <div className="text-xs font-medium">
                       0{i + 1}
@@ -95,7 +106,7 @@ export default function Home() {
                 {el.images.map((img, i) => (
                   <motion.li
                     key={i}
-                    animate={{ skewX: scrollDirection === "down" ? 1 : scrollDirection === "up" ? -1 : 0 }}
+                    animate={{ perspective: perspectiveValue, rotateY: rotateValue, rotateZ: zValue }}
                     className={`col-span-2 size-full overflow-hidden ${i === 2 || i === 5 ? 'col-span-4 md:col-span-2' : 'col-span-2'}`}>
                     <motion.div
                       variants={imgVariants}
@@ -103,7 +114,13 @@ export default function Home() {
                       animate='visible'
                       initial='hidden'
                       >
-                      <img src={`/images/${img}`} alt={img} />
+                      <Image 
+                        src={`/images/${img}`} 
+                        alt={img} 
+                        width={1000} 
+                        height={1000} 
+                        priority
+                        ></Image>
                     </motion.div>
                     <div className="text-xs font-medium">
                       0{i + 1}
@@ -114,8 +131,8 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        
       </section>
+      <Footer></Footer>
     </main>
   );
 }
